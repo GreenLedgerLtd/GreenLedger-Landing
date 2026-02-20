@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 const DEFAULT_KEYWORDS = ["GreenLedger", "green"];
 
 interface HighlightKeywordsProps {
@@ -7,7 +9,7 @@ interface HighlightKeywordsProps {
   keywords?: string[];
   className?: string;
   keywordClassName?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 }
 
 /**
@@ -28,7 +30,7 @@ export function HighlightKeywords({
   const escaped = sorted.map((k) => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
   const regex = new RegExp(`(${escaped.join("|")})`, "gi");
 
-  const parts: (string | JSX.Element)[] = [];
+  const parts: (string | React.JSX.Element)[] = [];
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
