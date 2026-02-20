@@ -33,8 +33,26 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Waitlist submission error:", error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorDetails = error instanceof Error ? error.stack : undefined;
+    
+    // Log full error for debugging
+    console.error("Full error details:", {
+      message: errorMessage,
+      details: errorDetails,
+      env: {
+        hasSheetId: !!process.env.GOOGLE_SHEET_ID,
+        hasEmail: !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        hasKey: !!process.env.GOOGLE_PRIVATE_KEY,
+      },
+    });
+
     return NextResponse.json(
-      { error: "Failed to submit form" },
+      {
+        ok: false,
+        error: "Failed to submit form",
+        message: errorMessage,
+      },
       { status: 500 }
     );
   }

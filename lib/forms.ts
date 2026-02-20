@@ -6,13 +6,14 @@ export async function submitWaitlist(data: {
   role?: string;
   country?: string;
   interest?: string;
-}): Promise<{ ok: boolean; message?: string }> {
+}): Promise<{ ok: boolean; message?: string; error?: string }> {
   const res = await fetch("/api/waitlist", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  return res.json();
+  const result = await res.json();
+  return result;
 }
 
 export async function submitPartnerBank(data: {

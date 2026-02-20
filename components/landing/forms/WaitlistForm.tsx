@@ -11,6 +11,7 @@ interface WaitlistFormProps {
 
 export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,17 +23,20 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
+    setErrorMessage("");
     try {
-      const res = await submitWaitlist(formData);
-      if (res.ok) {
+      const result = await submitWaitlist(formData);
+      if (result.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", company: "", role: "", country: "" });
         onSuccess?.();
       } else {
         setStatus("error");
+        setErrorMessage(result.message || result.error || "Something went wrong. Please try again.");
       }
-    } catch {
+    } catch (error) {
       setStatus("error");
+      setErrorMessage(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     }
   };
 
@@ -128,7 +132,12 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
         </div>
       </div>
       {status === "error" && (
-        <p className="text-red-400 text-sm">Something went wrong. Please try again.</p>
+        <div className="text-red-400 text-sm space-y-1">
+          <p className="font-medium">Something went wrong.</p>
+          {errorMessage && (
+            <p className="text-xs opacity-80">{errorMessage}</p>
+          )}
+        </div>
       )}
       <Button type="submit" className="w-full" disabled={status === "loading"}>
         {status === "loading" ? "Joining..." : "Join Waitlist"}
