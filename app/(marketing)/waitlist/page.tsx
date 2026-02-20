@@ -1,4 +1,5 @@
 import { WaitlistForm } from "@/components/landing/forms/WaitlistForm";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 
 export default function WaitlistPage() {
   return (
@@ -8,7 +9,7 @@ export default function WaitlistPage() {
           Join the Waitlist
         </h1>
         <p className="text-[var(--foreground)]/70 text-center mb-8 text-sm">
-          Be the first to access green capital for your sustainable business.
+          <HighlightKeywords text="Be the first to access green capital for your sustainable business." as="span" />
         </p>
         <div className="glass-card rounded-2xl p-6 sm:p-8">
           <WaitlistForm />

@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { useCTA } from "./CTAContext";
 
 export function Hero() {
@@ -24,7 +25,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-[90vh] flex items-center pt-24 overflow-hidden"
+      className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center pt-[calc(env(safe-area-inset-top)+3.5rem)] sm:pt-[calc(env(safe-area-inset-top)+4rem)] overflow-hidden"
       aria-label="Hero"
     >
       {/* Background effects */}
@@ -55,39 +56,42 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div>
+          <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-[3.4rem] font-bold tracking-tight text-[var(--foreground)] leading-[1.05]">
-                Unlock Verified Green Capital in Africa
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] font-bold tracking-tight text-[var(--foreground)] leading-[1.05]">
+                <HighlightKeywords text="Unlock Verified Green Capital in Africa" keywords={["Green"]} as="span" />
               </h1>
-              <p className="mt-5 text-base sm:text-lg text-[var(--foreground)]/75 max-w-xl">
-                GreenLedger connects sustainable African SMEs with banks deploying ESG-aligned green
-                finance through a verified deal pipeline.
+              <p className="mt-4 sm:mt-5 text-base sm:text-lg text-[var(--foreground)]/75 max-w-xl mx-auto lg:mx-0">
+                <HighlightKeywords
+                  text="GreenLedger connects sustainable African SMEs with banks deploying ESG-aligned green finance through a verified deal pipeline."
+                  as="span"
+                />
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Button variant="primary" size="lg" className="px-8" onClick={openWaitlist}>
+              <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center justify-center lg:justify-start">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto sm:px-8 min-h-[48px]" onClick={openWaitlist}>
                   Join the Waitlist
                 </Button>
-                <Button variant="secondary" size="lg" onClick={openPartner}>
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto min-h-[48px]" onClick={openPartner}>
                   Apply as Partner Bank
                 </Button>
-                <Link href="/book-call">
-                  <Button variant="ghost" size="lg">
+                <Link href="/book-call" className="w-full sm:w-auto">
+                  <Button variant="ghost" size="lg" className="w-full sm:w-auto min-h-[48px]">
                     Book a Call
                   </Button>
                 </Link>
               </div>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <span className="inline-flex items-center rounded-full border border-[var(--glass-border)] px-3 py-1 text-xs font-medium text-[var(--foreground)]/80">
+              <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-4 justify-center lg:justify-start">
+                <span className="inline-flex items-center rounded-full border border-[var(--glass-border)] px-3 py-1.5 sm:py-1 text-xs font-medium text-[var(--foreground)]/80">
                   Backed by ESSEC Business School
                 </span>
-                <span className="inline-flex items-center rounded-full border border-[var(--glass-border)] px-3 py-1 text-xs font-medium text-[var(--foreground)]/80">
+                <span className="inline-flex items-center rounded-full border border-[var(--glass-border)] px-3 py-1.5 sm:py-1 text-xs font-medium text-[var(--foreground)]/80">
                   Early traction with African SMEs
                 </span>
               </div>
@@ -126,7 +130,7 @@ export function Hero() {
                       transition={{ delay: 0.4 + i * 0.1 }}
                     >
                       <p className="text-[0.65rem] uppercase tracking-[0.14em] text-[var(--foreground)]/50">
-                        {item.label}
+                        <HighlightKeywords text={item.label} as="span" keywordClassName="text-[var(--primary)]" />
                       </p>
                       <p
                         className={`mt-2 text-2xl font-semibold ${
@@ -157,7 +161,10 @@ export function Hero() {
                       ESG alignment
                     </p>
                     <p className="text-[0.75rem] text-[var(--foreground)]/55">
-                      Deals structured against green taxonomies and climate finance guidelines.
+                      <HighlightKeywords
+                        text="Deals structured against green taxonomies and climate finance guidelines."
+                        as="span"
+                      />
                     </p>
                   </div>
                 </div>

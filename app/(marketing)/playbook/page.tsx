@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { SuccessMessage } from "@/components/ui/SuccessMessage";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { submitPlaybook } from "@/lib/forms";
 
 export default function PlaybookPage() {
@@ -28,23 +30,21 @@ export default function PlaybookPage() {
     <main className="min-h-[60vh] flex items-center justify-center py-24 px-4">
       <div className="w-full max-w-md text-center">
         <h1 className="text-2xl font-bold text-[var(--foreground)] mb-2">
-          Download Green Finance Playbook
+          <HighlightKeywords text="Download Green Finance Playbook" as="span" />
         </h1>
         <p className="text-[var(--foreground)]/70 mb-4 text-sm">
           Coming soon. Enter your email to get notified when it&apos;s available.
         </p>
         <ul className="text-left text-[var(--foreground)]/70 text-xs mb-6 space-y-1.5 max-w-sm mx-auto">
-          <li>• Practical checklist for structuring SME green projects.</li>
+          <li>• <HighlightKeywords text="Practical checklist for structuring SME green projects." as="span" /></li>
           <li>• Examples of bank-ready documentation and data points.</li>
-          <li>• Insights from African green finance practitioners.</li>
+          <li>• <HighlightKeywords text="Insights from African green finance practitioners." as="span" /></li>
         </ul>
         {status === "submitted" ? (
-          <div className="glass-card rounded-2xl p-8">
-            <p className="text-[var(--primary)] font-medium">You&apos;re on the list!</p>
-            <p className="text-sm text-[var(--foreground)]/70 mt-1">
-              We&apos;ll email you when the playbook launches.
-            </p>
-          </div>
+          <SuccessMessage
+            title="You're on the list!"
+            description="We'll email you when the playbook launches."
+          />
         ) : (
           <div className="glass-card rounded-2xl p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-4">

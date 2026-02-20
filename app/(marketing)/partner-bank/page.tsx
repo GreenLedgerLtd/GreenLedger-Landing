@@ -1,4 +1,5 @@
 import { PartnerBankForm } from "@/components/landing/forms/PartnerBankForm";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 
 export default function PartnerBankPage() {
   return (
@@ -8,7 +9,7 @@ export default function PartnerBankPage() {
           Apply as Partner Bank
         </h1>
         <p className="text-[var(--foreground)]/70 text-center mb-8 text-sm">
-          Join our verified green deal pipeline. ESG-aligned capital deployment.
+          <HighlightKeywords text="Join our verified green deal pipeline. ESG-aligned capital deployment." as="span" />
         </p>
         <div className="glass-card rounded-2xl p-6 sm:p-8">
           <PartnerBankForm />

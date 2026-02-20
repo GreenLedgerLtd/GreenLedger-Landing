@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { SuccessMessage } from "@/components/ui/SuccessMessage";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { submitBookCall } from "@/lib/forms";
 
 export default function BookCallPage() {
@@ -28,16 +30,16 @@ export default function BookCallPage() {
   if (status === "submitted") {
     return (
       <main className="min-h-[60vh] flex items-center justify-center py-24 px-4">
-        <div className="w-full max-w-md text-center">
-          <h1 className="text-2xl font-bold text-[var(--foreground)] mb-4">
-            Request Received
-          </h1>
-          <p className="text-[var(--foreground)]/70 mb-6">
-            We&apos;ll be in touch shortly to schedule your call.
-          </p>
-          <Link href="/">
-            <Button variant="secondary">Back to Home</Button>
-          </Link>
+        <div className="w-full max-w-md">
+          <SuccessMessage
+            title="Request received!"
+            description="We'll be in touch shortly to schedule your call."
+          />
+          <div className="mt-6 text-center">
+            <Link href="/">
+              <Button variant="secondary">Back to Home</Button>
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -50,7 +52,10 @@ export default function BookCallPage() {
           Book a Call
         </h1>
         <p className="text-[var(--foreground)]/70 text-center mb-8 text-sm">
-          Schedule a conversation with our team. We&apos;d love to hear about your green finance goals.
+          <HighlightKeywords
+            text="Schedule a conversation with our team. We'd love to hear about your green finance goals."
+            as="span"
+          />
         </p>
         <div className="glass-card rounded-2xl p-6 sm:p-8">
           <form onSubmit={handleSubmit} className="space-y-4">

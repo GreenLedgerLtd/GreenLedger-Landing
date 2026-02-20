@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Section";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { problemStats } from "@/lib/content";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 
@@ -23,15 +24,18 @@ export function Problem() {
         {problemStats.map((stat, i) => (
           <motion.div key={stat.title} variants={staggerItem}>
             <Card variant="glow" className="h-full border-l-4 border-l-[var(--primary)]">
-              <h3 className="text-lg font-semibold text-[var(--foreground)]">{stat.title}</h3>
+              <h3 className="text-lg font-semibold text-[var(--foreground)]">
+                <HighlightKeywords text={stat.title} as="span" />
+              </h3>
               <ul className="mt-3 space-y-1.5 text-[var(--foreground)]/70 text-sm">
-                <li>{stat.description}</li>
+                <li><HighlightKeywords text={stat.description} as="span" /></li>
                 {i === 0 && (
                   <li>
-                    <span className="font-semibold text-[var(--foreground)]">
-                      No standardized green products
-                    </span>{" "}
-                    across many SME portfolios.
+                    <HighlightKeywords
+                      text="No standardized green products across many SME portfolios."
+                      as="span"
+                      keywordClassName="text-[var(--primary)] font-semibold"
+                    />
                   </li>
                 )}
                 {i === 1 && (

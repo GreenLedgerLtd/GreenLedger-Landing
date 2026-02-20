@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { SuccessMessage } from "@/components/ui/SuccessMessage";
 import { submitPartnerBank } from "@/lib/forms";
 import { countries } from "@/lib/countries";
 
@@ -19,6 +20,7 @@ export function PartnerBankForm({ onSuccess }: PartnerBankFormProps) {
     country: "",
     message: "",
   });
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export function PartnerBankForm({ onSuccess }: PartnerBankFormProps) {
     try {
       const res = await submitPartnerBank(formData);
       if (res.ok) {
+        setSubmittedEmail(formData.email || null);
         setStatus("success");
         setFormData({ name: "", email: "", institution: "", role: "", country: "", message: "" });
         onSuccess?.();
@@ -39,12 +42,11 @@ export function PartnerBankForm({ onSuccess }: PartnerBankFormProps) {
 
   if (status === "success") {
     return (
-      <div className="text-center py-6">
-        <p className="text-[var(--primary)] font-medium">Application received!</p>
-        <p className="text-[var(--foreground)]/70 mt-1 text-sm">
-          Our team will review and reach out shortly.
-        </p>
-      </div>
+      <SuccessMessage
+        title="Application received!"
+        description="Our team will review your application and reach out shortly."
+        email={submittedEmail ?? undefined}
+      />
     );
   }
 
@@ -92,7 +94,7 @@ export function PartnerBankForm({ onSuccess }: PartnerBankFormProps) {
           placeholder="Bank or financial institution"
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="pb-role" className="block text-sm font-medium text-[var(--foreground)]/80 mb-1">
             Role

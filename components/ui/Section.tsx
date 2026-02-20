@@ -3,6 +3,7 @@
 import { type HTMLAttributes } from "react";
 import { motion } from "framer-motion";
 import { fadeInUp } from "@/lib/animations";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 
 interface SectionProps extends HTMLAttributes<HTMLElement> {
   id?: string;
@@ -24,11 +25,11 @@ export function Section({
   return (
     <section
       id={id}
-      className={`py-16 sm:py-20 lg:py-24 ${className}`}
+      className={`py-14 sm:py-20 lg:py-24 ${className}`}
       aria-labelledby={id ? `${id}-heading` : undefined}
       {...props}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <motion.div
           initial="initial"
           whileInView="animate"
@@ -44,13 +45,13 @@ export function Section({
           )}
           <h2
             id={id ? `${id}-heading` : undefined}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--foreground)]"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--foreground)]"
           >
-            {title}
+            <HighlightKeywords text={title} as="span" />
           </h2>
           {subtitle && (
-            <p className="mt-4 text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
-              {subtitle}
+            <p className="mt-4 text-base sm:text-lg text-[var(--foreground)]/70 max-w-2xl mx-auto">
+              <HighlightKeywords text={subtitle} as="span" />
             </p>
           )}
         </motion.div>

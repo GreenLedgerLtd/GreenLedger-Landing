@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { SuccessMessage } from "@/components/ui/SuccessMessage";
 import { submitWaitlist } from "@/lib/forms";
 import { countries } from "@/lib/countries";
 
@@ -19,6 +20,7 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     role: "",
     country: "",
   });
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     try {
       const result = await submitWaitlist(formData);
       if (result.ok) {
+        setSubmittedEmail(formData.email || null);
         setStatus("success");
         setFormData({ name: "", email: "", company: "", role: "", country: "" });
         onSuccess?.();
@@ -42,12 +45,11 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
 
   if (status === "success") {
     return (
-      <div className="text-center py-6">
-        <p className="text-[var(--primary)] font-medium">You’re on the list!</p>
-        <p className="text-[var(--foreground)]/70 mt-1 text-sm">
-          We’ll contact you when we launch.
-        </p>
-      </div>
+      <SuccessMessage
+        title="You're on the list!"
+        description="Thank you for joining. We'll contact you when we launch."
+        email={submittedEmail ?? undefined}
+      />
     );
   }
 
@@ -94,7 +96,7 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
           placeholder="Your company"
         />
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="wl-role" className="block text-sm font-medium text-[var(--foreground)]/80 mb-1">
             Role

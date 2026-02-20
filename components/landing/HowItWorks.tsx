@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "@/components/ui/Section";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { solutionSteps } from "@/lib/content";
 
 export function HowItWorks() {
@@ -20,7 +21,7 @@ export function HowItWorks() {
             <motion.button
               key={step.step}
               onClick={() => setActiveStep(i)}
-              className={`w-full text-left rounded-xl p-4 border transition-all ${
+              className={`w-full text-left rounded-xl p-4 min-h-[52px] flex items-center border transition-all ${
                 activeStep === i
                   ? "border-[var(--primary)] bg-[var(--glass-bg)]"
                   : "border-[var(--glass-border)] hover:border-[var(--primary)]/50"
@@ -37,12 +38,14 @@ export function HowItWorks() {
                 >
                   {step.step}
                 </span>
-                <span className="font-medium text-[var(--foreground)]">{step.title}</span>
+                <span className="font-medium text-[var(--foreground)]">
+                <HighlightKeywords text={step.title} as="span" />
+              </span>
               </div>
             </motion.button>
           ))}
         </div>
-        <div className="w-full lg:w-1/2 glass-card rounded-2xl p-8 min-h-[220px] flex flex-col gap-4">
+        <div className="w-full lg:w-1/2 glass-card rounded-2xl p-6 sm:p-8 min-h-[200px] sm:min-h-[220px] flex flex-col gap-4 text-center lg:text-left">
           <div className="relative h-10 mb-1 hidden sm:block">
             <div className="absolute inset-y-1 left-0 right-0 flex items-center justify-between px-2">
               {solutionSteps.map((step, i) => (
@@ -76,10 +79,10 @@ export function HowItWorks() {
               className="space-y-4"
             >
               <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                {solutionSteps[activeStep].title}
+                <HighlightKeywords text={solutionSteps[activeStep].title} as="span" />
               </h3>
               <p className="text-[var(--foreground)]/75">
-                {solutionSteps[activeStep].description}
+                <HighlightKeywords text={solutionSteps[activeStep].description} as="span" />
               </p>
             </motion.div>
           </AnimatePresence>

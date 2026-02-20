@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/components/theme/ThemeProvider";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 
 export function Footer() {
   const { theme } = useTheme();
@@ -11,10 +12,10 @@ export function Footer() {
     : "/brand/logos/GreenLedger Logo S (Dark).svg";
 
   return (
-    <footer className="py-12 sm:py-16 border-t border-[var(--glass-border)]" aria-label="Footer">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div>
+    <footer className="py-12 sm:py-16 pb-[max(3rem,env(safe-area-inset-bottom))] border-t border-[var(--glass-border)]" aria-label="Footer">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start">
             <Link href="/" className="inline-block hover:opacity-80 transition-opacity">
               <Image
                 src={logoSrc}
@@ -25,10 +26,13 @@ export function Footer() {
               />
             </Link>
             <p className="mt-3 text-sm text-[var(--foreground)]/70 max-w-xs">
-              Connecting sustainable African SMEs with banks deploying green finance. Africa-first.
+              <HighlightKeywords
+                text="Connecting sustainable African SMEs with banks deploying green finance. Africa-first."
+                as="span"
+              />
             </p>
           </div>
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-sm font-semibold text-[var(--foreground)] uppercase tracking-wider mb-3">
               Contact
             </h4>
@@ -49,7 +53,7 @@ export function Footer() {
               </a>
             </p>
           </div>
-          <div>
+          <div className="flex flex-col items-center md:items-start">
             <h4 className="text-sm font-semibold text-[var(--foreground)] uppercase tracking-wider mb-3">
               Legal
             </h4>
@@ -64,7 +68,11 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-[var(--glass-border)] text-center text-sm text-[var(--foreground)]/60">
-          GreenLedger — Financing Africa&apos;s sustainable future.
+          <HighlightKeywords
+            text="GreenLedger — Financing Africa's sustainable future."
+            as="span"
+            keywordClassName="text-[var(--primary)] font-medium"
+          />
         </div>
       </div>
     </footer>

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { SuccessMessage } from "@/components/ui/SuccessMessage";
+import { HighlightKeywords } from "@/components/ui/HighlightKeywords";
 import { submitEarlyAccess } from "@/lib/forms";
 
 export default function EarlyAccessPage() {
@@ -34,17 +36,15 @@ export default function EarlyAccessPage() {
           Get priority access to our platform. Limited spots.
         </p>
         <ul className="text-left text-[var(--foreground)]/70 text-xs mb-6 space-y-1.5 max-w-sm mx-auto">
-          <li>• Influence product roadmap for African green finance.</li>
+          <li>• <HighlightKeywords text="Influence product roadmap for African green finance." as="span" /></li>
           <li>• Early visibility on curated SME and project pipeline.</li>
           <li>• Priority onboarding and support for partner teams.</li>
         </ul>
         {status === "submitted" ? (
-          <div className="glass-card rounded-2xl p-8">
-            <p className="text-[var(--primary)] font-medium">Thank you!</p>
-            <p className="text-sm text-[var(--foreground)]/70 mt-1">
-              We&apos;ll reach out with early access details.
-            </p>
-          </div>
+          <SuccessMessage
+            title="Thank you!"
+            description="We'll reach out with early access details soon."
+          />
         ) : (
           <div className="glass-card rounded-2xl p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-4">
