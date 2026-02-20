@@ -44,12 +44,12 @@ export function Footer() {
             </a>
             <p className="mt-2">
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/greenledgerltd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-[var(--primary)] hover:text-[var(--primary-light)]"
               >
-                LinkedIn (placeholder)
+                LinkedIn
               </a>
             </p>
           </div>
